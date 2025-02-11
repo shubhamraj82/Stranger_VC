@@ -21,4 +21,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Video Calling App"
 include(":app")
- 

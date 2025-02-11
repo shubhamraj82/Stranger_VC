@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "679247816928",
+    "project_id": "strangersvideocall-fb8a9",
+    "storage_bucket": "strangersvideocall-fb8a9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:679247816928:android:7b4d7289dd4b62cf92c885",
+        "android_client_info": {
+          "package_name": "com.example.videocallingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "679247816928-vp4qjddsojul5ddlsf9h136a7q5sueen.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.videocallingapp",
+            "certificate_hash": "d7819cbcda095bcf73d755a0736538313bb08ad9"
+          }
+        },
+        {
+          "client_id": "679247816928-qo0qg8tsl7gsttvil4vh2qi26iih1d05.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC54VBXfnuQU1NSwTR1c_AK16YsvwPQcFI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "679247816928-qo0qg8tsl7gsttvil4vh2qi26iih1d05.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

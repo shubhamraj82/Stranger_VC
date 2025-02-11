@@ -5,8 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
-
+    tools:context=".activites.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -16,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bg_simple" />
+        android:src="@drawable/bg_simple" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -27,13 +26,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.77"
-        app:srcCompat="@drawable/logo" />
+        android:src="@drawable/logo" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:gravity="center"
         android:text="Please login to continue"
         android:textColor="@color/white"
@@ -47,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="By continuing, you are agreeing to our Terms and Privacy Policy."
+        android:text="By continuing, \nyou are agreeing to our Terms and Privacy Policy."
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
@@ -72,7 +70,7 @@
             android:id="@+id/imageView5"
             android:layout_width="16dp"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/google" />
+            android:src="@drawable/google" />
 
         <TextView
             android:id="@+id/textView5"

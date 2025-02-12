@@ -29,7 +29,6 @@ class LoginActivity : AppCompatActivity() {
     private val RC_SIGN_IN = 11
     private lateinit var mAuth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
-
     private lateinit var loginBtn: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {

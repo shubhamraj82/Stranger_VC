@@ -17,109 +17,108 @@ import com.google.firebase.database.ValueEventListener
 
 class ConnectingActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivityConnectingBinding
+    private lateinit var binding: ActivityConnectingBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
-    private var isOkay=false
+    private var isOkay = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_connecting)
 
-        auth=FirebaseAuth.getInstance()
-        database=FirebaseDatabase.getInstance()
+        binding = ActivityConnectingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
 
         val profile = intent.getStringExtra("profile")
         Glide.with(this)
             .load(profile)
             .into(binding.profile)
 
-        val username=auth.uid
+        val username = auth.uid
 
-        database.reference.child("users")
-            .orderByChild("status")
-            .equalTo(0.0).limitToFirst(1)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if(snapshot.childrenCount>0){
-                        isOkay=true
-                        //Room Available
-                        for(childSnap in snapshot.children){
-                            database.reference
-                                .child("users")
-                                .child(childSnap.key!!)
-                                .child("incoming")
-                                .setValue(username)
-                            database.reference
-                                .child("users")
-                                .child(childSnap.key!!)
-                                .child("status")
-                                .setValue(1)
-                            val intent = Intent(this@ConnectingActivity, CallActivity::class.java)
-                            val incoming = childSnap.child("incoming").getValue(String::class.java)
-                            val createdBy = childSnap.child("createdBy").getValue(String::class.java)
-                            val isAvailable = childSnap.child("isAvailable").getValue(Boolean::class.java)
-                            intent.putExtra("username", username)
-                            intent.putExtra("incoming", incoming)
-                            intent.putExtra("createdBy", createdBy)
-                            intent.putExtra("isAvailable", isAvailable)
-                            startActivity(intent)
-                            finish()
-                        }
-                    }else{
-                        //Room Not Available
-                        val room= hashMapOf(
-                            "incoming" to username,
-                            "createdBy" to username,
-                            "isAvailable" to true,
-                            "status" to 0
-                        )
-
-                        database.reference
-                            .child("users")
-                            .child(username!!)
-                            .setValue(room).addOnSuccessListener {
+        if (username != null) {
+            database.reference.child("users")
+                .orderByChild("status")
+                .equalTo(0.0).limitToFirst(1)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.childrenCount > 0) {
+                            isOkay = true
+                            // Room Available
+                            for (childSnap in snapshot.children) {
                                 database.reference
                                     .child("users")
-                                    .child(username).addValueEventListener(object : ValueEventListener {
-                                        override fun onDataChange(snapshot: DataSnapshot) {
-                                            if (snapshot.child("status").exists()){
-                                                if(snapshot.child("status").getValue(Int::class.java)==1){
-                                                    if(isOkay) return
+                                    .child(childSnap.key!!)
+                                    .child("incoming")
+                                    .setValue(username)
+                                database.reference
+                                    .child("users")
+                                    .child(childSnap.key!!)
+                                    .child("status")
+                                    .setValue(1)
+                                val intent = Intent(this@ConnectingActivity, CallActivity::class.java)
+                                val incoming = childSnap.child("incoming").getValue(String::class.java)
+                                val createdBy = childSnap.child("createdBy").getValue(String::class.java)
+                                val isAvailable = childSnap.child("isAvailable").getValue(Boolean::class.java)
+                                intent.putExtra("username", username)
+                                intent.putExtra("incoming", incoming)
+                                intent.putExtra("createdBy", createdBy)
+                                intent.putExtra("isAvailable", isAvailable)
+                                startActivity(intent)
+                                finish()
+                            }
+                        } else {
+                            // Room Not Available
+                            val room = hashMapOf(
+                                "incoming" to username,
+                                "createdBy" to username,
+                                "isAvailable" to true,
+                                "status" to 0
+                            )
 
-                                                    isOkay=true
-                                                    val intent = Intent(this@ConnectingActivity, CallActivity::class.java)
-                                                    val incoming = snapshot.child("incoming").getValue(String::class.java)
-                                                    val createdBy = snapshot.child("createdBy").getValue(String::class.java)
-                                                    val isAvailable = snapshot.child("isAvailable").getValue(Boolean::class.java)
-                                                    intent.putExtra("username", username)
-                                                    intent.putExtra("incoming", incoming)
-                                                    intent.putExtra("createdBy", createdBy)
-                                                    intent.putExtra("isAvailable", isAvailable)
-                                                    startActivity(intent)
-                                                    finish()
+                            database.reference
+                                .child("users")
+                                .child(username)
+                                .setValue(room).addOnSuccessListener {
+                                    database.reference
+                                        .child("users")
+                                        .child(username).addValueEventListener(object : ValueEventListener {
+                                            override fun onDataChange(snapshot: DataSnapshot) {
+                                                if (snapshot.child("status").exists()) {
+                                                    if (snapshot.child("status").getValue(Int::class.java) == 1) {
+                                                        if (isOkay) return
+
+                                                        isOkay = true
+                                                        val intent = Intent(this@ConnectingActivity, CallActivity::class.java)
+                                                        val incoming = snapshot.child("incoming").getValue(String::class.java)
+                                                        val createdBy = snapshot.child("createdBy").getValue(String::class.java)
+                                                        val isAvailable = snapshot.child("isAvailable").getValue(Boolean::class.java)
+                                                        intent.putExtra("username", username)
+                                                        intent.putExtra("incoming", incoming)
+                                                        intent.putExtra("createdBy", createdBy)
+                                                        intent.putExtra("isAvailable", isAvailable)
+                                                        startActivity(intent)
+                                                        finish()
+                                                    }
                                                 }
                                             }
-                                        }
 
-                                        override fun onCancelled(error: DatabaseError) {
-                                            TODO("Not yet implemented")
-                                        }
-
-                                    })
-                            }
+                                            override fun onCancelled(error: DatabaseError) {
+                                                // Handle error
+                                            }
+                                        })
+                                }
+                        }
                     }
-                }
 
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-
-            })
-
-        binding=ActivityConnectingBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+                    override fun onCancelled(error: DatabaseError) {
+                        // Handle error
+                    }
+                })
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

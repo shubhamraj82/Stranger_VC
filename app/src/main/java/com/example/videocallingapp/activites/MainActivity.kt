@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
+                        Log.e("MainActivity", "Database error: ${error.message}")
                     }
 
                 })
@@ -68,6 +69,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.findButton.setOnClickListener{
             if(isPermissionsGranted()){
+                Log.d("MainActivity", "Permissions granted")
                 if(coins>5){
                     coins-=5
                     currentUser?.let {
@@ -83,6 +85,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "Insufficient Coins", Toast.LENGTH_SHORT).show()
                 }
             }else{
+                Log.d("MainActivity", "Permissions not granted")
                 askPermissions()
             }
         }

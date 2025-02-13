@@ -55,6 +55,9 @@ dependencies {
     implementation(libs.firebase.database.ktx)
     implementation (libs.glide)
     testImplementation(libs.junit)
+    implementation(libs.play.services.ads)
+    implementation (libs.kotlinx.coroutines.core)
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }

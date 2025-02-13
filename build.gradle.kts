@@ -9,6 +9,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven("https://jitpack.io")
     }
     dependencies {
         classpath(libs.kotlin.gradle.plugin)

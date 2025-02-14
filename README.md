@@ -1,6 +1,6 @@
 Strangers Video Calling App is a real-time video chat application that connects users randomly for live video calls. The app includes a unique credit-based system where users spend coins for each video call. Users can earn more coins by watching ads, ensuring continuous engagement and monetization.
 
-Features
+Features:-
 
 Real-Time Video Calling: Connect instantly with random users for seamless video calls.
 
@@ -12,7 +12,7 @@ Smooth UI/UX: Designed for an intuitive and engaging experience.
 
 Secure & Anonymous: Ensures user privacy while chatting with strangers.
 
-How It Works
+How It Works:-
 
 Start a Video Call: Open the app and get matched with a random user.
 
@@ -22,7 +22,7 @@ Earn More Coins: Watch ads to get free coins and extend your calling experience.
 
 Enjoy Conversations: Meet new people and engage in real-time video chats.
 
-Technologies Used
+Technologies Used:-
 
 Frontend: XML (Android) 
 
